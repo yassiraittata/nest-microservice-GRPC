@@ -40,10 +40,13 @@ export class UsersService implements OnModuleInit {
 
       return this.users[userIndex];
     }
-    throw new NotFoundException('user was not found!')
+    throw new NotFoundException('user was not found!');
   }
 
   remove(id: string) {
-    return `This action removes a #${id} user`;
+    const userIndex = this.users.findIndex((user) => user.id === id);
+    if (userIndex !== -1) {
+      return this.users.splice(userIndex)[0];
+    }
   }
 }
