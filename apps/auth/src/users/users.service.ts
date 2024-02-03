@@ -1,6 +1,7 @@
 import { CreateUserDto, UpdateUserDto, User } from '@app/common';
-import { Injectable, OnModuleInit } from '@nestjs/common';
+import { Injectable, NotFoundException, OnModuleInit } from '@nestjs/common';
 import { randomUUID } from 'crypto';
+import { NotFoundError } from 'rxjs';
 
 @Injectable()
 export class UsersService implements OnModuleInit {
@@ -30,7 +31,16 @@ export class UsersService implements OnModuleInit {
   }
 
   update(id: string, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+    const userIndex = this.users.findIndex((user) => user.id === id);
+    if (userIndex !== -1) {
+      this.users[userIndex] = {
+        ...this.users[userIndex],
+        ...updateUserDto,
+      };
+
+      return this.users[userIndex];
+    }
+    throw new NotFoundException('user was not found!')
   }
 
   remove(id: string) {
