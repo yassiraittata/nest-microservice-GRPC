@@ -22,7 +22,7 @@ export class UsersService implements OnModuleInit {
   }
 
   findAll() {
-    return `This action returns all users`;
+    return { users: this.users };
   }
 
   findOne(id: string) {
