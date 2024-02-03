@@ -26,7 +26,7 @@ export class UsersService implements OnModuleInit {
   }
 
   findOne(id: string) {
-    return `This action returns a #${id} user`;
+    return this.users.find((el) => el.id === id);
   }
 
   update(id: string, updateUserDto: UpdateUserDto) {

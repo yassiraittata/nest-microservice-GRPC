@@ -7,6 +7,8 @@ import {
   UserServiceControllerMethods,
   FindUserDto,
   PagiantionDto,
+  Users,
+  User,
 } from '@app/common';
 import { Observable } from 'rxjs';
 
@@ -19,11 +21,11 @@ export class UsersController implements UserServiceController {
     return this.usersService.create(createUserDto);
   }
 
-  findAllUser() {
+  findAllUser(): Users {
     return this.usersService.findAll();
   }
 
-  findOneUser(findOneUserDto: FindUserDto) {
+  findOneUser(findOneUserDto: FindUserDto): User {
     return this.usersService.findOne(findOneUserDto.id);
   }
 
